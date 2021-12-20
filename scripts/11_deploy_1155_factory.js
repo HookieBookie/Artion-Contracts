@@ -9,9 +9,9 @@ async function main() {
   const factory = await Factory.deploy(
     MARKETPLACE,
     BUNDLE_MARKETPLACE,
-    '20000000000000000000',
+    '2000000000000000000',
     TREASURY_ADDRESS,
-    '10000000000000000000'
+    '1000000000000000000'
   );
   await factory.deployed();
   console.log('FantomArtFactory deployed to:', factory.address);
@@ -22,9 +22,9 @@ async function main() {
   const privateFactory = await PrivateFactory.deploy(
     MARKETPLACE,
     BUNDLE_MARKETPLACE,
-    '20000000000000000000',
+    '2000000000000000000',
     TREASURY_ADDRESS,
-    '10000000000000000000'
+    '1000000000000000000'
   );
   await privateFactory.deployed();
   console.log('FantomArtFactoryPrivate deployed to:', privateFactory.address);

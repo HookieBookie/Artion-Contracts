@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.6.12;
+pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/GSN/Context.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Artion is ERC721("Artion", "ART"), Ownable {
-
+contract NFTContract is ERC721URIStorage, Ownable {
+    using SafeMath for uint256;
     /// @dev Events of the contract
     event Minted(
         uint256 tokenId,
@@ -35,10 +37,12 @@ contract Artion is ERC721("Artion", "ART"), Ownable {
     address payable public feeReceipient;
 
     /// @notice Contract constructor
-    constructor(
+    constructor (
         address payable _feeRecipient,
         uint256 _platformFee
-    ) public {
+    ) 
+    ERC721("NFTHab", "NFTHAB")        
+    {
         platformFee = _platformFee;
         feeReceipient = _feeRecipient;
     }

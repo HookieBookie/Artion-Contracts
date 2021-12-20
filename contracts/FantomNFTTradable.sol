@@ -1,15 +1,19 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.6.12;
+pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
  * @title FantomNFTTradable
  * FantomNFTTradable - ERC721 contract that whitelists a trading address, and has minting functionality.
  */
-contract FantomNFTTradable is ERC721, Ownable {
+contract FantomNFTTradable is ERC721URIStorage, Ownable {
+
+    using SafeMath for uint256;
     /// @dev Events of the contract
     event Minted(
         uint256 tokenId,

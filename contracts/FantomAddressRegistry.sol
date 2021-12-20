@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.6.12;
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/introspection/IERC165.sol";
+import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract FantomAddressRegistry is Ownable {
     bytes4 private constant INTERFACE_ID_ERC721 = 0x80ac58cd;
 
-    /// @notice Artion contract
-    address public artion;
+    /// @notice NFTHab contract
+    address public nfthab;
 
     /// @notice FantomAuction contract
     address public auction;
@@ -39,15 +39,15 @@ contract FantomAddressRegistry is Ownable {
     address public priceFeed;
 
     /**
-     @notice Update artion contract
+     @notice Update nfthab contract
      @dev Only admin
      */
-    function updateArtion(address _artion) external onlyOwner {
+    function updateNFTHab(address _nfthab) external onlyOwner {
         require(
-            IERC165(_artion).supportsInterface(INTERFACE_ID_ERC721),
+            IERC165(_nfthab).supportsInterface(INTERFACE_ID_ERC721),
             "Not ERC721"
         );
-        artion = _artion;
+        nfthab = _nfthab;
     }
 
     /**

@@ -7,9 +7,9 @@ const {
 async function main() {
   const ArtTradable = await ethers.getContractFactory('FantomArtTradable');
   const nft = await ArtTradable.deploy(
-    'FantomArt',
-    'FART',
-    '20000000000000000000',
+    'NFTHabFTM',
+    'NFTFTM',
+    '2000000000000000000',
     TREASURY_ADDRESS,
     MARKETPLACE,
     BUNDLE_MARKETPLACE

@@ -12,11 +12,11 @@ async function main(network) {
     const { TREASURY_ADDRESS, PLATFORM_FEE, WRAPPED_FTM_MAINNET, WRAPPED_FTM_TESTNET } = require('../constants');
   
     ////////////
-    const Artion = await ethers.getContractFactory('Artion');
-    const artion = await Artion.deploy(TREASURY_ADDRESS, '2000000000000000000');
+    const NFTHab = await ethers.getContractFactory('NFTContract');
+    const nfthab = await NFTHab.deploy(TREASURY_ADDRESS, '1000000000000000000');
   
-    await artion.deployed();  
-    console.log('FantomArtion deployed at', artion.address);
+    await nfthab.deployed();  
+    console.log('FantomNFTHab deployed at', nfthab.address);
     ///////////
 
     //////////
@@ -104,9 +104,9 @@ async function main(network) {
         AUCTION_PROXY_ADDRESS,
         MARKETPLACE_PROXY_ADDRESS,
         BUNDLE_MARKETPLACE_PROXY_ADDRESS,
-        '10000000000000000000',
+        '1000000000000000000',
         TREASURY_ADDRESS,
-        '50000000000000000000'
+        '5000000000000000000'
     );
     await factory.deployed();
     console.log('FantomNFTFactory deployed to:', factory.address);
@@ -118,9 +118,9 @@ async function main(network) {
         AUCTION_PROXY_ADDRESS,
         MARKETPLACE_PROXY_ADDRESS,
         BUNDLE_MARKETPLACE_PROXY_ADDRESS,
-        '10000000000000000000',
+        '1000000000000000000',
         TREASURY_ADDRESS,
-        '50000000000000000000'
+        '5000000000000000000'
     );
     await privateFactory.deployed();
     console.log('FantomNFTFactoryPrivate deployed to:', privateFactory.address);
@@ -129,12 +129,12 @@ async function main(network) {
     ////////
     const NFTTradable = await ethers.getContractFactory('FantomNFTTradable');
     const nft = await NFTTradable.deploy(
-        'Artion',
-        'ART',
+        'NFTHab',
+        'HAB',
         AUCTION_PROXY_ADDRESS,
         MARKETPLACE_PROXY_ADDRESS,
         BUNDLE_MARKETPLACE_PROXY_ADDRESS,
-        '10000000000000000000',
+        '1000000000000000000',
         TREASURY_ADDRESS
     );
     await nft.deployed();
@@ -144,12 +144,12 @@ async function main(network) {
         'FantomNFTTradablePrivate'
     );
     const nftPrivate = await NFTTradablePrivate.deploy(
-        'IArtion',
-        'IART',
+        'INFTHab',
+        'IHAB',
         AUCTION_PROXY_ADDRESS,
         MARKETPLACE_PROXY_ADDRESS,
         BUNDLE_MARKETPLACE_PROXY_ADDRESS,
-        '10000000000000000000',
+        '1000000000000000000',
         TREASURY_ADDRESS
     );
     await nftPrivate.deployed();
@@ -189,72 +189,19 @@ async function main(network) {
     ////////
 
     ////////
-    const ArtTradable = await ethers.getContractFactory('FantomArtTradable');
-    const artTradable = await ArtTradable.deploy(
-        'FantomArt',
-        'FART',
-        '20000000000000000000',
-        TREASURY_ADDRESS,
-        MARKETPLACE_PROXY_ADDRESS,
-        BUNDLE_MARKETPLACE_PROXY_ADDRESS
-    );
-    await artTradable.deployed();
-    console.log('FantomArtTradable deployed to:', artTradable.address);
-
-    const ArtTradablePrivate = await ethers.getContractFactory(
-        'FantomArtTradablePrivate'
-    );
-    const artTradablePrivate = await ArtTradablePrivate.deploy(
-        'FantomArt',
-        'FART',
-        '20000000000000000000',
-        TREASURY_ADDRESS,
-        MARKETPLACE_PROXY_ADDRESS,
-        BUNDLE_MARKETPLACE_PROXY_ADDRESS
-    );
-    await artTradablePrivate.deployed();
-    console.log('FantomArtTradablePrivate deployed to:', artTradablePrivate.address);
-    ////////
-
-    ////////
-    const ArtFactory = await ethers.getContractFactory('FantomArtFactory');
-    const artFactory = await ArtFactory.deploy(
-        MARKETPLACE_PROXY_ADDRESS,
-        BUNDLE_MARKETPLACE_PROXY_ADDRESS,
-        '20000000000000000000',
-        TREASURY_ADDRESS,
-        '10000000000000000000'
-     );
-    await artFactory.deployed();
-    console.log('FantomArtFactory deployed to:', artFactory.address);
-
-    const ArtFactoryPrivate = await ethers.getContractFactory(
-        'FantomArtFactoryPrivate'
-    );
-    const artFactoryPrivate = await ArtFactoryPrivate.deploy(
-        MARKETPLACE_PROXY_ADDRESS,
-        BUNDLE_MARKETPLACE_PROXY_ADDRESS,
-        '20000000000000000000',
-        TREASURY_ADDRESS,
-        '10000000000000000000'
-    );
-    await artFactoryPrivate.deployed();
-    console.log('FantomArtFactoryPrivate deployed to:', artFactoryPrivate.address);
-    ////////
     
     await marketplace.updateAddressRegistry(FANTOM_ADDRESS_REGISTRY);   
     await bundleMarketplace.updateAddressRegistry(FANTOM_ADDRESS_REGISTRY);
     
     await auction.updateAddressRegistry(FANTOM_ADDRESS_REGISTRY);
     
-    await addressRegistry.updateArtion(artion.address);
+    await addressRegistry.updateNFTHab(nfthab.address);
     await addressRegistry.updateAuction(auction.address);
     await addressRegistry.updateMarketplace(marketplace.address);
     await addressRegistry.updateBundleMarketplace(bundleMarketplace.address);
     await addressRegistry.updateNFTFactory(factory.address);
     await addressRegistry.updateTokenRegistry(tokenRegistry.address);
     await addressRegistry.updatePriceFeed(priceFeed.address);
-    await addressRegistry.updateArtFactory(artFactory.address);   
 
     await tokenRegistry.add(WRAPPED_FTM);
 
